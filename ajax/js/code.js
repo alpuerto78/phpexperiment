@@ -48,13 +48,13 @@ $(document).ready(function() {
 	});
 
 	// save record
-	$('#overlay').on('click','#save', function() {
+	$('#overlay').on('submit','#form-add', function() {
 
 		$.ajax({
 
 			url: 'add.php',
 			method: 'POST',
-			data: $('#form-add').serialize(),
+			data: $(this).serialize(),
 			success: function() {
 
 				clear_fields();
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	// update record
-	$('#overlay').on('click','#update', function() {
+	$('#overlay').on('submit','#form-update', function() {
 
 		$.ajax({
 

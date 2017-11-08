@@ -1,5 +1,5 @@
 	
-	<form id="form-add" action="#">
+	<form id="form-add">
 		
 		<div>
 			<label for="pname"> Product Name</label>
@@ -7,11 +7,11 @@
 		</div>
 		<div>
 			<label for="price"> Price </label>
-			<input type="text" name="price" id="price" required>
+			<input type="text" name="price" id="price" required pattern="^[0-9]\d*(\.\d+)?$">
 		</div>
 		<div>
 			<label for="stock"> Stock </label>
-			<input type="text" name="stock" id="stock" required>
+			<input type="text" name="stock" id="stock" required pattern="^[0-9]*$">
 		</div>
 		<div>
 			<label> &nbsp; </label>
@@ -31,11 +31,11 @@
 		</div>
 		<div>
 			<label for="price"> Price </label>
-			<input type="text" name="price" id="price">
+			<input type="text" name="price" id="price" required pattern="^[0-9]\d*(\.\d+)?$">
 		</div>
 		<div>
 			<label for="stock"> Stock </label>
-			<input type="text" name="stock" id="stock">
+			<input type="text" name="stock" id="stock" required pattern="^[0-9]*$">
 		</div>
 		<div>
 			<label> &nbsp; </label>
