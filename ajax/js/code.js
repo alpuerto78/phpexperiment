@@ -110,6 +110,25 @@ $(document).ready(function() {
 		
 	});
 
+	$('#pname').on('keyup', function() {
+
+		var pname = $(this).val();
+
+		$.ajax({
+
+			url: "search.php",
+			method: 'post',
+			data: {pname:pname},
+			success: function(data) {
+
+				$('#search-data').empty().append(data);
+
+			}
+
+		});
+
+	});
+
 });
 
 function display_data() {

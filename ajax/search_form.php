@@ -9,21 +9,22 @@
 <body>
 <div id="wrapper">	
 
-	<a id="add-record" class="hover-pointer"> Add Record </a><a href="search_form.php" id="search-record" class="hover-pointer no-underline"> Search  Record </a>
+	<form id="form-search" class="forms">
+		
+		<div>
+			<label for="pname"> Search </label>
+			<input type="text" name="pname" id="pname" placeholder="Search Keys">
+		</div>
+
+	</form>
 
 	<hr>
 
-	<div id="container-data">
+	<table id="search-data">
 		
 		<!-- load data here from database -->
 
-	</div>
-
-	<div id="overlay">
-		
-		<!--load form here -->
-
-	</div>
+	</table>
 
 </div>
 
