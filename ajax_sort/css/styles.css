@@ -1,0 +1,68 @@
+html {
+
+	font-size: 100%;
+
+}
+
+
+#wrapper {
+
+	margin: 20px auto;
+
+}
+
+table {
+
+	border-collapse: collapse;
+
+}
+
+td {
+
+	position: relative;	
+	padding: 10px 35px 10px 15px;
+
+}
+
+.table-header > td {
+
+	font-weight: bold;
+
+}
+
+.table-header > td > img {
+
+	position: absolute;
+    width: 8px;
+    height: 8px;
+
+
+}
+
+.table-header > td > img:hover {
+
+	cursor: pointer; 
+
+}
+
+.table-header > td > img.up {
+
+	right: 8px;
+    top: 10px;
+
+}
+
+.table-header > td > img.down {
+
+	right: 8px;
+    bottom: 10px;
+
+}
+
+
+td {
+
+	border: 1px solid black;
+
+
+}

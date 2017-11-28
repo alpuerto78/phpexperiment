@@ -18,6 +18,8 @@
 
 	</form>
 
+	<p id="x"></p>
+
 	<hr>
 
 	<table id="search-data">
