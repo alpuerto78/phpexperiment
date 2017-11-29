@@ -26,43 +26,9 @@ $(document).ready(function() {
 	$('#container-data').on('click','.up, .down', function() {
 
 		var _this = $(this);
+		var has_classUp = _this.hasClass('up');
 
-		var color_value = _this.attr('src');
-		var has_class = _this.hasClass('up');
-
-		if (has_class) { //for up
-
-			if (color_value == 'img/arrow-up-grey.gif') {
-
-				_this.siblings('img').attr('src','img/arrow-down-grey.gif');
-				_this.attr('src','img/arrow-up-black.gif');
-
-			} else {
-
-				_this.siblings('img').attr('src','img/arrow-up-grey.gif');
-				_this.attr('src','img/arrow-down-black.gif');
-
-			}
-
-
-		} else {
-
-			if (color_value == 'img/arrow-down-grey.gif') {
-
-				_this.siblings('img').attr('src','img/arrow-up-grey.gif');
-				_this.attr('src','img/arrow-down-black.gif');
-
-			} else {
-
-				_this.siblings('img').attr('src','img/arrow-up-black.gif');
-				_this.attr('src','img/arrow-down-grey.gif');
-
-			}
-
-
-		}
-
-		all_arrow_grey(_this);
+		all_arrow_grey(_this, has_classUp);
 
 	});
 
@@ -87,7 +53,19 @@ function display_data() {
 
 }
 
-function all_arrow_grey(_this) {
+function all_arrow_grey(_this, has_classUp) {
+
+	if (has_classUp) {
+
+		_this.attr('src','img/arrow-up-black.gif');
+		_this.siblings('img').attr('src','img/arrow-down-grey.gif');
+
+	} else {
+
+		_this.attr('src','img/arrow-down-black.gif');
+		_this.siblings('img').attr('src','img/arrow-up-grey.gif');
+
+	}
 
 	_this.parent('td').siblings('td').find('img.up').attr('src','img/arrow-up-grey.gif');
 	_this.parent('td').siblings('td').find('img.down').attr('src','img/arrow-down-grey.gif');
