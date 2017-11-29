@@ -28,7 +28,7 @@ $(document).ready(function() {
 		var _this = $(this);
 		var has_classUp = _this.hasClass('up');
 
-		all_arrow_grey(_this, has_classUp);
+		set_arrow_colors(_this, has_classUp);
 
 	});
 
@@ -53,7 +53,7 @@ function display_data() {
 
 }
 
-function all_arrow_grey(_this, has_classUp) {
+function set_arrow_colors(_this, has_classUp) {
 
 	if (has_classUp) {
 
