@@ -9,21 +9,24 @@
 <body>
 <div id="wrapper">	
 
-	<span id="add-record" class="hover-pointer"> Add Record </span>
+	<form id="form-search" class="forms">
+		
+		<div>
+			<label for="pname"> Search </label>
+			<input type="text" name="pname" id="pname" placeholder="Search Keys">
+		</div>
+
+	</form>
+
+	<p id="x"></p>
 
 	<hr>
 
-	<div id="container-data">
+	<table id="search-data">
 		
 		<!-- load data here from database -->
 
-	</div>
-
-	<div id="overlay">
-		
-		<!--load form here -->
-
-	</div>
+	</table>
 
 </div>
 

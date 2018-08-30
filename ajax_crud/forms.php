@@ -1,5 +1,5 @@
 	
-	<form id="form-add">
+	<form id="form-add" class="forms">
 		
 		<div>
 			<label for="pname"> Product Name</label>
@@ -22,7 +22,7 @@
 
 	</form>
 
-	<form id="form-update">
+	<form id="form-update" class="forms">
 		
 		<input type="hidden" name="pid" id="pid">
 		<div>

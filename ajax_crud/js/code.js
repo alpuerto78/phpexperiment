@@ -4,7 +4,7 @@ $(document).ready(function() {
 	
 	//fetch updated data every 1 second
 	$('#container-data').load('display_data.php');
-	setInterval('display_data()', 1000);
+	//setInterval('display_data()', 1000);
 
 	//show form-add
 	$('#add-record').on('click', function() {
@@ -110,6 +110,18 @@ $(document).ready(function() {
 		
 	});
 
+	$('#pname').on('keyup', function() {
+
+		var pname = $(this).val();
+
+		var timing = setTimeout(function() {
+
+			throttle_ajax(pname);
+
+		}, 3000);
+
+	});
+
 });
 
 function display_data() {
@@ -119,6 +131,8 @@ function display_data() {
 	$.ajax({
 
 		url: 'display_data.php',
+		dataType: 'html',
+		method: 'post',
 		success: function(data) {
 
 			container_data.empty();
@@ -133,5 +147,22 @@ function display_data() {
 function clear_fields() {
 
 	$('input:text').val('');
+
+}
+
+function throttle_ajax(pname) {
+
+	$.ajax({
+
+		url: "search.php",
+		method: 'post',
+		data: {pname:pname},
+		success: function(data) {
+
+			$('#search-data').empty().append(data);
+
+		}
+
+	});
 
 }
