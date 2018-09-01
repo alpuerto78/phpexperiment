@@ -2,40 +2,13 @@
 
 /* SETS OF FUNCTIONS FOR CREATING DATA */
 
-function createData($table_name, $post_data) {
-
-	global $conn;
-
-	$based = 0;
+function query($table_name, &$post_data) { //Name of Table, Posted Data
 
 	array_pop($post_data);
 
 	$sql = "INSERT INTO {$table_name} (" . getDBFields($post_data) . ") VALUES (" . getTokens($post_data) . ")";
 
-	$stmt = $conn->prepare($sql);
-
-	$bind_params = explode(',',bindTokens($post_data));
-
-	foreach ($bind_params as $p => $value) {
-
-		if (true) {
-
-			$value = str_replace('\,','',$value);
-
-			echo "$value" . "<br>";
-
-		}
-
-		//$stmt->bindValue($p = $p + 1, str_replace(',','',$value), PDO::PARAM_STR);
-
-	}
-
-	// $stmt->bindValue(1, 'Maaliw', PDO::PARAM_STR);
-	// $stmt->bindValue(2, 'Renato III', PDO::PARAM_STR);
-	// $stmt->bindValue(3, 'Male', PDO::PARAM_STR);
-	// $stmt->bindValue(4, '2', PDO::PARAM_INT);
-
-	//$stmt->execute();
+	return $sql;
 
 }
 
@@ -51,9 +24,10 @@ function getTokens($post_data) {
 
 	$new_array = [];
 
-	foreach ($post_data as $p) {
+	foreach ($post_data as $key => $p) {
 
-		array_push($new_array, "?");
+		//array_push($new_array, "?");
+		array_push($new_array, ":" . $key);
 
 	}
 
@@ -63,20 +37,39 @@ function getTokens($post_data) {
 
 }
 
-function bindTokens($post_data) {
+function bind($stmt, $param, $value, $type = null) {
 
-	$new_array = [];
+	if (is_null($type)) {
 
-	foreach ($post_data as $post => $value) {
+		switch(true) {
 
-		array_push($new_array, $value); 
+			case is_int($value):
+
+				$type = PDO::PARAM_INT;
+
+			break;
+
+			case is_bool($value):
+
+				$type = PDO::PARAM_BOOL;
+
+			break;
+
+			case is_null($value):
+
+				$type = PDO::PARAM_NULL;
+
+			break;
+
+			default:
+
+				$type = PDO::PARAM_STR;
+
+		}
 
 	}
 
-	$imploded = implode(',', $new_array);
-
-	return $imploded;
-
+	return $stmt->bindParam(":" . $param, sanitizedInput($value), $type);
 
 }
 
@@ -85,7 +78,6 @@ function sanitizedInput($value) {
 	$value = trim($value);
 	$value = strip_tags($value);
 	$value = stripslashes($value);
-	$value = str_replace(',','',$value);
 
 	return $value;
 

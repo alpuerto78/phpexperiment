@@ -18,30 +18,19 @@
 
 			if (isset($_POST['create'])) {
 
-				createData('tblemployees', $_POST);
+				$sql = query('tblemployees', $_POST); 
 
+				$stmt = $conn->prepare($sql);
+
+				foreach ($_POST as $key => $value) {
+
+					bind($stmt, $key, $value);
+
+				}
 				
+				$stmt->execute();
 
 				unset($_POST['create']);
-
-				// $firstname = $_POST['firstname'];
-				// $lastname = $_POST['lastname'];
-				// $sex = $_POST['sex'];
-				// $department = $_POST['department'];
-
-				// $sql_string = "INSERT INTO tblemployees (lastname, firstname, sex, departmentid) ";
-				// $sql_string .= "VALUES (:lastname, :firstname, :sex, :department)";
-
-				// $stmt_prepare = $conn->prepare($sql_string);
-
-				// $stmt_prepare->bindParam(":lastname", $lastname, PDO::PARAM_STR);
-				// $stmt_prepare->bindParam(":firstname", $firstname, PDO::PARAM_STR);
-				// $stmt_prepare->bindParam(":sex", $sex, PDO::PARAM_STR);
-				// $stmt_prepare->bindParam(":department", $department, PDO::PARAM_STR);
-
-				// $stmt_prepare->execute();
-
-				// unset($_POST['create']);
 
 			}
 
