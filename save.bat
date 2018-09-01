@@ -1,6 +1,6 @@
 @echo off
 
-set /P description = Enter Description: 
+set /P description=Enter Description: 
 
 set "str=%description% - "
 
@@ -9,8 +9,6 @@ set "TIMESTAMP=%TIME:~0,2%_%TIME:~3,2%_%TIME:~6,2%"
 
 set "DATEANDTIME=%DATESTAMP%_%TIMESTAMP%"
 set "CONCAT=%str%%DATEANDTIME%"
-
-
 
 git add . --all
 git commit -m "%CONCAT%"
