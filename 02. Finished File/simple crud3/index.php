@@ -1,7 +1,6 @@
 <?php 
 
-	include('connection.php');
-	include('include/functions.php');
+	require('include/bootstrap.php');
 
 ?>
 <!DOCTYPE html>
@@ -18,17 +17,7 @@
 
 			if (isset($_POST['create'])) {
 
-				$sql = query('tblemployees', $_POST); 
-
-				$stmt = $conn->prepare($sql);
-
-				foreach ($_POST as $key => $value) {
-
-					bind($stmt, $key, $value);
-
-				}
-				
-				$stmt->execute();
+				execute_query('tblemployees', $_POST);
 
 				unset($_POST['create']);
 
@@ -59,8 +48,8 @@
 						
 						<?php
 
-							$sql_string = "SELECT * FROM tbldepartment ORDER BY department";
-							echo bindToComboBox($sql_string, 'departmentid', 'department');
+							$sql = "SELECT * FROM tbldepartment ORDER BY department";
+							echo bindToComboBox($sql, 'departmentid', 'department');
 
 						?>
 
@@ -79,14 +68,10 @@
 
 		<?php
 
-			$sql_string = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON ";
-			$sql_string .= "tblemployees.departmentid = tbldepartment.departmentid ORDER BY lastname";
+			$sql = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON ";
+			$sql .= "tblemployees.departmentid = tbldepartment.departmentid ORDER BY lastname";
 
-			$stmt_prepare = $conn->prepare($sql_string);
-
-			$stmt_prepare->execute();
-
-			$count = $stmt_prepare->rowCount();
+			$count = row_count($sql);
 
 			if ($count > 0) {
 
@@ -99,15 +84,18 @@
 					echo "<th colspan='2'> Action </th>";
 				echo "</tr>";
 
-				while ($result = $stmt_prepare->fetch(PDO::FETCH_ASSOC)) {
+				$result = fetch_multiple_data($sql);
+
+				foreach ($result as $key) {
 
 					echo "<tr>";
-						echo "<td>" . $result['lastname'] . "</td>";
-						echo "<td>" . $result['firstname'] . "</td>";
-						echo "<td>" . $result['sex'] . "</td>";
-						echo "<td>" . $result['department'] . "</td>";
-						echo "<td><a href='update.php?id={$result['employeeid']}'> UPDATE </a>";
-						echo "<td><a href=\"delete.php?id={$result['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
+					
+						echo "<td>" . $key['lastname'] . "</td>";
+						echo "<td>" . $key['firstname'] . "</td>";
+						echo "<td>" . $key['sex'] . "</td>";
+						echo "<td>" . $key['department'] . "</td>";
+						echo "<td><a href='update.php?id={$key['employeeid']}'> UPDATE </a>";
+						echo "<td><a href=\"delete.php?id={$key['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
 					echo "</tr>";
 
 				}
