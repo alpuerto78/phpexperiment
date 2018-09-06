@@ -15,16 +15,16 @@
 
 		<?php
 
-			$id = $_GET['id'];
+			$employeeid = $_GET['employeeid'];
 
 			$sql = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON ";
-			$sql .= "tblemployees.departmentid = tbldepartment.departmentid WHERE employeeid = :id";
+			$sql .= "tblemployees.departmentid = tbldepartment.departmentid WHERE employeeid = :employeeid";
 
-			$result = fetch_single_data($sql, $id);
+			$result = fetch_single_data($sql, 'employeeid', $employeeid);
 
 			if (isset($_POST['update'])) {
 
-				execute_query('tblemployees', $_POST, 'update', 'employeeid', $id);
+				execute_query('tblemployees', $_POST, 'update', 'employeeid', $employeeid);
 
 				unset($_POST['create']);
 
@@ -34,17 +34,17 @@
 
 		?>
 
-		<form action="<?php echo $_SERVER['PHP_SELF'] . "?id=" . $id; ?>" method="post">
+		<form action="<?php echo $_SERVER['PHP_SELF'] . "?employeeid=" . $employeeid; ?>" method="post">
 			
 			<fieldset>
 				<legend> Update Record </legend>
 				<div>
 					<label for="lastname"> Last Name </label>
-					<input type="text" name="lastname" id="lastname" required value="<?php echo $result['lastname']?>">
+					<input type="text" name="lastname" id="lastname" required minlength="2" value="<?php echo $result['lastname']?>">
 				</div>
 				<div>
 					<label for="firstname"> First Name </label>
-					<input type="text" name="firstname" id="firstname" required value="<?php echo $result['firstname']?>">
+					<input type="text" name="firstname" id="firstname" required minlength="2" value="<?php echo $result['firstname']?>">
 				</div>
 				<div>
 					<label for="sex"> Sex </label>
@@ -59,7 +59,7 @@
 
 							$sql = "SELECT * FROM tbldepartment";
 
-							echo bindToComboBoxUpdate($sql, 'departmentid', 'department', $id);
+							echo bindToComboBoxUpdate($sql, 'departmentid', 'department', $result['departmentid']);
 
 						?>
 

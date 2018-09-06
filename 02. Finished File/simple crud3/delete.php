@@ -1,17 +1,13 @@
 <?php
 
-	require('connection.php');
+	require('include/bootstrap.php');
 
-	$id = $_GET['id'];
+	$employeeid = $_GET['employeeid'];
 
-	$sql_cmd = "DELETE FROM tblemployees WHERE employeeid = :id";
+	$post_data = []; //no post data will pe passed
 
-	$stmt = $conn->prepare($sql_cmd);
+	execute_query('tblemployees', $post_data, 'delete', 'employeeid', $employeeid);
 
-	$stmt->bindParam(":id", $id, PDO::PARAM_INT);
-
-	$stmt->execute();
-
-	header("Location: index.php");
+	redirect_to("index.php");
 
 ?>

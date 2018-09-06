@@ -94,8 +94,8 @@
 						echo "<td>" . $key['firstname'] . "</td>";
 						echo "<td>" . $key['sex'] . "</td>";
 						echo "<td>" . $key['department'] . "</td>";
-						echo "<td><a href='update.php?id={$key['employeeid']}'> UPDATE </a>";
-						echo "<td><a href=\"delete.php?id={$key['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
+						echo "<td><a href='update.php?employeeid={$key['employeeid']}'> UPDATE </a>";
+						echo "<td><a href=\"delete.php?employeeid={$key['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
 					echo "</tr>";
 
 				}

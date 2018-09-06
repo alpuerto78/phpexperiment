@@ -2,46 +2,39 @@
 
 /* SETS OF FUNCTIONS FOR CREATING DATA, UPDATING DATA */
 
-function execute_query($table_name, &$post_data, $mode = 'create', $primary_key = null, $id = null) { //Name of Table, Posted Data, Mode?, [for update], [for update]
+// Name of Table, Posted Data, [Mode], [Primary Key], [Primary Key Value]
+function execute_query($table_name, &$post_data, $mode = 'create', $primary_key = null, $primary_key_value = null) { 
 
 	global $conn;
 
+	//Remove Last Item on $_POST (usually button)
 	array_pop($post_data);
 
-	switch($mode) {
+	//ASSEMBLE SQL String
+	$sql = getSQL($table_name, $post_data, $mode, $primary_key);
 
-		case 'create':
-
-			$sql = "INSERT INTO {$table_name} (" . getDBFields($post_data) . ") VALUES (" . getTokens($post_data) . ")";
-
-		break;
-
-		case 'update':
-
-			//$sql = "UPDATE {$table_name} SET lastname = :lastname, firstname = :firstname, sex = :sex, departmentid = :departmentid ";
-			//$sql .= "WHERE {$primary_key} = :id ";
-
-			$sql = "UPDATE {$table_name} SET " . getTokens($post_data, 'update');
-			$sql .= " WHERE {$primary_key} = :{$primary_key}";
-
-		break;
-
-	} 
-
+	//Prepare SQL
 	$stmt = $conn->prepare($sql);
 
-	foreach ($post_data as $key => $value) {
+	//Bind Parameters for Create, Update
+	if ($mode == 'create' || $mode == 'update') {
 
-		bind($stmt, $key, $value);
+		foreach ($post_data as $key => $value) {
+
+			bind($stmt, $key, $value);
+
+		}
+
+	} 
+	
+	//BIND 'WHERE' PARAMETERS (Update or Delete)
+	if ($mode == 'update' || $mode == 'delete') {
+
+		bind($stmt, $primary_key, $primary_key_value);
 
 	}
-
-	if (!is_null($primary_key)) { //Applicable on Update Only
-
-		bind($stmt, $primary_key, $id);
-
-	}
-
+	
+	//EXECUTE Query
 	$stmt->execute();
 
 }
@@ -75,7 +68,7 @@ function getTokens($post_data, $mode = 'create') {
 
 			foreach ($post_data as $key => $value) {
 
-				array_push($new_array, $key . " = " . ":" . $key);
+				array_push($new_array, $key . " = :" . $key);
 
 			}
 
@@ -89,43 +82,77 @@ function getTokens($post_data, $mode = 'create') {
 
 }
 
-function bind($stmt, $param, $value, $type = null) {
+function bind($stmt, $param, $value) {
 
-	if (is_null($type)) {
-
-		switch(true) {
-
-			case is_int($value):
-
-				$type = PDO::PARAM_INT;
-
-			break;
-
-			case is_bool($value):
-
-				$type = PDO::PARAM_BOOL;
-
-			break;
-
-			case is_null($value):
-
-				$type = PDO::PARAM_NULL;
-
-			break;
-
-			default:
-
-				$type = PDO::PARAM_STR;
-
-		}
-
-	}
-
-	return $stmt->bindParam(":" . $param, sanitizedInput($value), $type);
+	return $stmt->bindParam(":" . $param, sanitizeInput($value), getDataType($value));
 
 }
 
-function sanitizedInput($value) {
+function getSQL($table_name, $post_data, $mode = 'create', $primary_key = null) {
+
+	switch($mode) {
+
+		case 'create':
+
+			$sql = "INSERT INTO {$table_name} (" . getDBFields($post_data) . ") VALUES (" . getTokens($post_data) . ")";
+
+		break;
+
+		case 'update':
+
+			//$sql = "UPDATE {$table_name} SET lastname = :lastname, firstname = :firstname, sex = :sex, departmentid = :departmentid ";
+			//$sql .= "WHERE {$primary_key} = :id ";
+
+			$sql = "UPDATE {$table_name} SET " . getTokens($post_data, 'update');
+			$sql .= " WHERE {$primary_key} = :{$primary_key}";
+
+		break;
+
+		case 'delete':
+
+			$sql = "DELETE FROM {$table_name} WHERE {$primary_key} = :{$primary_key}";
+
+		break;
+
+	} 
+
+	return $sql;
+
+}
+
+function getDataType($value) {
+
+	switch(true) {
+
+		case is_int($value):
+
+			$type = PDO::PARAM_INT;
+
+		break;
+
+		case is_bool($value):
+
+			$type = PDO::PARAM_BOOL;
+
+		break;
+
+		case is_null($value):
+
+			$type = PDO::PARAM_NULL;
+
+		break;
+
+		default:
+
+			$type = PDO::PARAM_STR;
+
+	}
+
+	return $type;
+
+}
+
+function sanitizeInput($value) {
 
 	$value = trim($value);
 	$value = strip_tags($value);
@@ -138,15 +165,13 @@ function sanitizedInput($value) {
 /* END SETS OF FUNCTIONS FOR CREATING DATA */
 
 /* FUNCTIONS FOR RETURNING DATA */
-
-
-function fetch_single_data($sql, $id = null) {
+function fetch_single_data($sql, $primary_key, $primary_key_value = null) {
 
 	global $conn;
 
 	$stmt = $conn->prepare($sql);
 
-	$stmt->bindParam(":id", $id, PDO::PARAM_STR);
+	$stmt->bindParam(":" . $primary_key, $primary_key_value, PDO::PARAM_STR);
 
 	$stmt->execute();
 
