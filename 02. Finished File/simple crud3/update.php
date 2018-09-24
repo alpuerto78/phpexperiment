@@ -17,8 +17,7 @@
 
 			$id = $_GET['id'];
 
-			$sql = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON ";
-			$sql .= "tblemployees.departmentid = tbldepartment.departmentid WHERE employeeid = :id";
+			$sql = "SELECT * FROM tblemployees WHERE employeeid = :id";
 
 			$result = fetch_single_data($sql, $id);
 
@@ -59,7 +58,7 @@
 
 							$sql = "SELECT * FROM tbldepartment";
 
-							echo bindToComboBoxUpdate($sql, 'departmentid', 'department', $id);
+							echo bindToComboBoxUpdate($sql, 'departmentid', 'department', $result['departmentid']);
 
 						?>
 
