@@ -21,7 +21,7 @@ function load_program(departmentid) {
 	$.ajax({
 
 		method: 'POST',
-		url: 'load_progra.php',
+		url: 'load_program.php',
 		data: {departmentid : departmentid},
 		success: function(data) {
 
