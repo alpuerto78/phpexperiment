@@ -15,16 +15,16 @@
 
 		<?php
 
-			$employeeid = $_GET['employeeid'];
+			$agentid = $_GET['agentid'];
 
-			$sql = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON ";
-			$sql .= "tblemployees.departmentid = tbldepartment.departmentid WHERE employeeid = :employeeid";
+			$sql =  "SELECT * FROM tblagents INNER JOIN tblaccount ON ";
+			$sql .= " tblagents.accountid = tblaccount.accountid WHERE agentid = :agentid";
 
-			$result = fetch_single_data($sql, 'employeeid', $employeeid);
+			$result = fetch_single_data($sql, 'agentid', $agentid);
 
 			if (isset($_POST['update'])) {
 
-				execute_query('tblemployees', $_POST, 'update', 'employeeid', $employeeid);
+				execute_query('tblagents', $_POST, 'update', 'agentid', $agentid);
 
 				unset($_POST['create']);
 
@@ -34,7 +34,7 @@
 
 		?>
 
-		<form action="<?php echo $_SERVER['PHP_SELF'] . "?employeeid=" . $employeeid; ?>" method="post">
+		<form action="<?php echo $_SERVER['PHP_SELF'] . "?agentid=" . $agentid; ?>" method="post">
 			
 			<fieldset>
 				<legend> Update Record </legend>
@@ -51,15 +51,22 @@
 					<input type="radio" name="sex" value="Male"  <?php echo $result['sex'] === 'Male' ? 'checked' : '';?>> Male
 					<input type="radio" name="sex" value="Female" <?php echo $result['sex'] === 'Female' ? 'checked' : '';?>> Female
 				</div>
+					<div>
+					<label for="sex"> Area </label>
+					<input type="radio" name="area" value="North" required <?php echo $result['area'] === 'North' ? 'checked' : '';?>> North
+					<input type="radio" name="area" value="South" required <?php echo $result['area'] === 'South' ? 'checked' : '';?>> South
+					<input type="radio" name="area" value="East" required <?php echo $result['area'] === 'East' ? 'checked' : '';?>> East
+					<input type="radio" name="area" value="West" required <?php echo $result['area'] === 'West' ? 'checked' : '';?>> West
+				</div>
 				<div>
-					<label for="department"> Department </label>
-					<select name="departmentid" id="departmentid" required>
+					<label for="accountid"> Account </label>
+					<select name="accountid" id="accounttid" required>
 						
 						<?php
 
-							$sql = "SELECT * FROM tbldepartment";
+							$sql = "SELECT * FROM tblaccount";
 
-							echo bindToComboBoxUpdate($sql, 'departmentid', 'department', $result['departmentid']);
+							echo bindToComboBoxUpdate($sql, 'accountid', 'account', $result['agentid']);
 
 						?>
 

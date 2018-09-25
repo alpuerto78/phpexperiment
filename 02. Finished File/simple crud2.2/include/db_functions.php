@@ -33,7 +33,7 @@ function execute_query($table_name, &$post_data, $mode = 'create', $primary_key 
 		bind($stmt, $primary_key, $primary_key_value);
 
 	}
-	
+
 	//EXECUTE Query
 	$stmt->execute();
 

@@ -17,7 +17,7 @@
 
 			if (isset($_POST['create'])) {
 
-				execute_query('tblemployees', $_POST);
+				execute_query('tblagents', $_POST);
 
 				unset($_POST['create']);
 
@@ -43,13 +43,20 @@
 					<input type="radio" name="sex" value="Female" required> Female
 				</div>
 				<div>
-					<label for="departmentid"> Department </label>
-					<select name="departmentid" id="departmentid" required>
+					<label for="sex"> Area </label>
+					<input type="radio" name="area" value="North" required checked> North
+					<input type="radio" name="area" value="South" required> South
+					<input type="radio" name="area" value="East" required> East
+					<input type="radio" name="area" value="West" required> West
+				</div>
+				<div>
+					<label for="accountid"> Account </label>
+					<select name="accountid" id="accountid" required>
 						
 						<?php
 
-							$sql = "SELECT * FROM tbldepartment ORDER BY department";
-							echo bindToComboBox($sql, 'departmentid', 'department');
+							$sql = "SELECT * FROM tblaccount ORDER BY account";
+							echo bindToComboBox($sql, 'accountid', 'account');
 
 						?>
 
@@ -68,8 +75,8 @@
 
 		<?php
 
-			$sql = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON ";
-			$sql .= "tblemployees.departmentid = tbldepartment.departmentid ORDER BY lastname";
+			$sql = "SELECT * FROM tblagents INNER JOIN tblaccount ON ";
+			$sql .= "tblagents.accountid = tblaccount.accountid ORDER BY account";
 
 			$count = row_count($sql);
 
@@ -80,7 +87,8 @@
 					echo "<th> Last Name </th>";
 					echo "<th> First Name </th>";
 					echo "<th> Sex </th>";
-					echo "<th> Department </th>";
+					echo "<th> Area </th>";
+					echo "<th> Account </th>";
 					echo "<th colspan='2'> Action </th>";
 				echo "</tr>";
 
@@ -93,9 +101,10 @@
 						echo "<td>" . $key['lastname'] . "</td>";
 						echo "<td>" . $key['firstname'] . "</td>";
 						echo "<td>" . $key['sex'] . "</td>";
-						echo "<td>" . $key['department'] . "</td>";
-						echo "<td><a href='update.php?employeeid={$key['employeeid']}'> UPDATE </a>";
-						echo "<td><a href=\"delete.php?employeeid={$key['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
+						echo "<td>" . $key['area'] . "</td>";
+						echo "<td>" . $key['account'] . "</td>";
+						echo "<td><a href='update.php?agentid={$key['agentid']}'> UPDATE </a>";
+						echo "<td><a href=\"delete.php?agentid={$key['agentid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
 					echo "</tr>";
 
 				}
