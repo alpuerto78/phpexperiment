@@ -15,8 +15,8 @@ $(document).ready(function() {
 
 function load_program(departmentid) {
 
-	program_id = $('#programid');
-	department_id = $('#departmentid');
+	var program_id = $('#programid');
+	var department_id = $('#departmentid');
 
 	$.ajax({
 
@@ -28,11 +28,6 @@ function load_program(departmentid) {
 			program_id.html(data);
 
 		}
-
-	}).fail(function() {
-
-		$('<h4> AJAX Error! </h4>').insertAfter('form');
-		department_id.prop('disabled', true);
 
 	});
 
