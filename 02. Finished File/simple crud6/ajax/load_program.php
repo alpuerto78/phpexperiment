@@ -4,15 +4,9 @@
 
 	$departmentid = $_POST['departmentid'];
 
-	$sql = "SELECT * FROM tblprogram WHERE departmentid = :departmentid ORDER BY program_desc";
+	$sql = "SELECT * FROM tblprogram WHERE departmentid = {$departmentid} ORDER BY program_desc";
 
-	$stmt = $conn->prepare($sql);
-
-	$stmt->bindParam(':departmentid', $departmentid, PDO::PARAM_INT);
-
-	$stmt->execute();
-
-	$result = $stmt->fetchAll();
+	$result = fetch_multiple_data($sql);
 
 	$output = '';
 

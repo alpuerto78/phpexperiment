@@ -30,13 +30,13 @@
 
 			$output .= "<tr>";
 			
-				$output .= "<td>" . $key['lastname'] . "</td>";
+				$output .= "<td class='lastname'>" . $key['lastname'] . "</td>";
 				$output .= "<td>" . $key['firstname'] . "</td>";
 				$output .= "<td>" . $key['sex'] . "</td>";
 				$output .= "<td>" . $key['department'] . "</td>";
 				$output .= "<td>" . $key['program_desc'] . "</td>";
-				$output .= "<td><a href='update.php?id={$key['employeeid']}'> UPDATE </a>";
-				$output .= "<td><a href=\"delete.php?id={$key['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
+				$output .= "<td><a class='upd' href=\"update.php?id={$key['employeeid']}\" data-id=\"{$key['employeeid']}\"> UPDATE </a>";
+				$output .= "<td><a class='del' href=\"delete.php?id={$key['employeeid']}\" data-id=\"{$key['employeeid']}\"> DELETE </a>";
 			$output .= "</tr>";
 
 		}
