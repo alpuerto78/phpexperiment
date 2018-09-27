@@ -11,6 +11,8 @@
 
 	if ($count > 0) {
 
+		$output .= "<h3> Employee Directory </h3>";
+
 		$output .= "<table>";
 
 			$output .= "<tr>";
@@ -45,7 +47,7 @@
 
 	} else {
 
-		$output .= "<h3> No Records Found or Database is Empty! </h3>";
+		$output .= "<h3> No Records Found. </h3>";
 
 	}
 

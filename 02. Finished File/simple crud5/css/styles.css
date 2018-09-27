@@ -109,7 +109,11 @@ td, th {
 
 }
 
+hr {
 
+	margin: 20px 0;
+
+}
 #overlay {
 
 	position: absolute;

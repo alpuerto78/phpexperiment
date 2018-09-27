@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 		if (conf == true) {
 
-			delete_data(id, 'delete.php');
+			delete_data(id, 'ajax/delete.php');
 
 		}
 
