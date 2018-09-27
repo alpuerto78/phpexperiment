@@ -1,11 +1,17 @@
-var program_id = '#form-container #programid';
+var program_id = '#programid';
 var employee_table = $('#employee-table')
 
 $(document).ready(function() {
 
 	display_data(employee_table, 'ajax/load_employees.php'); //display stored data
 
-	$('#form-container').on('change', '#departmentid', function() { //departmentid dropdown
+	$('#create_button').on('click', function() {
+
+		$('#overlay').load('ajax/forms.php #add_form').fadeIn();
+
+	});
+
+	$('#overlay').on('change', '#departmentid', function() { //departmentid dropdown
 
 		var _this = $(this);
 
@@ -17,20 +23,29 @@ $(document).ready(function() {
 		
 	});
 
-	$('#form-container').on('click', '#create', function() { //if create button is clicked
+	$('#overlay').on('click', '#create', function() { //if create button is clicked
 
 		insert_data($('#add_form'), 'ajax/insert_employees.php', display_data, 'ajax/load_employees.php'); //target form, insert, display function, reload display
 
+		$(this).parents('#overlay').fadeOut();
+
 	});
 
-	$('#form-container').on('click', '#update', function() { //if update button is clicked
+	$('#overlay').on('click', '#update', function() { //if update button is clicked
 
 		var id = $('#update_form').attr('data-id');
 
 		insert_data($('#update_form'), 'ajax/update.php?id=' + id, display_data, 'ajax/load_employees.php'); //target form, insert, display function, reload display
 
+		$(this).parents('#overlay').fadeOut();
+
 	});
 
+	$('#overlay').on('click', '.cancel', function() {
+
+		$(this).parents('#overlay').fadeOut();
+
+	});
 
 	$('#employee-table').on('click', '.del', function(event) {
 
@@ -38,7 +53,13 @@ $(document).ready(function() {
 
 		var id = $(this).attr('data-id');
 
-		delete_data(id, 'delete.php');
+		var conf = confirm('Are You Sure?');
+
+		if (conf == true) {
+
+			delete_data(id, 'delete.php');
+
+		}
 
 	});
 
@@ -51,19 +72,18 @@ $(document).ready(function() {
 		$.ajax({
 
 			method: 'GET', //send as
-			url: 'retrieve_update_data.php', //link
+			url: 'ajax/forms.php', //link
 			data: {id: id}, //data to be send
 			dataType: 'html',
 			success: function(data) {
 
-				$('#form-container').html(data);
+				$('#overlay').html(data).fadeIn();
 
 			}
 
 		});
 
 	});
-
 
 });
 
@@ -72,7 +92,6 @@ $(document).ready(function() {
 function load_program(department_id, target_el) {
 
 	var departmentid = department_id;
-
 
 	$.ajax({
 
@@ -138,6 +157,5 @@ function delete_data(id, the_url) {
 		}
 
 	});
-
 
 }
