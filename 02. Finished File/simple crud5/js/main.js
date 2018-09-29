@@ -5,9 +5,9 @@ $(document).ready(function() {
 
 	display_data(employee_table, 'ajax/load_employees.php'); //display stored data
 
-	$('#create_button').on('click', function() {
+	$('#create_button').on('click', function() { //create record is clicked
 
-		$('#overlay').load('ajax/forms.php #add_form').fadeIn();
+		$('#overlay').load('ajax/forms.php #add_form').fadeIn(); //ajax load forms.php find #add_form
 
 	});
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 	$('#overlay').on('click', '#create', function() { //if create button is clicked
 
-		insert_data($('#add_form'), 'ajax/insert_employees.php', display_data, 'ajax/load_employees.php'); //target form, insert, display function, reload display
+		execute_query($('#add_form'), 'ajax/insert_employees.php', display_data, 'ajax/load_employees.php'); //target form, insert, display function, reload display
 
 		$(this).parents('#overlay').fadeOut();
 
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 		var id = $('#update_form').attr('data-id');
 
-		insert_data($('#update_form'), 'ajax/update.php?id=' + id, display_data, 'ajax/load_employees.php'); //target form, insert, display function, reload display
+		execute_query($('#update_form'), 'ajax/update.php?id=' + id, display_data, 'ajax/load_employees.php'); //target form, insert, display function, reload display
 
 		$(this).parents('#overlay').fadeOut();
 
@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 		var conf = confirm('Are You Sure?');
 
-		if (conf == true) {
+		if (conf) {
 
 			delete_data(id, 'ajax/delete.php');
 
@@ -124,14 +124,14 @@ function display_data(the_target, the_url) {
 
 }
 
-function insert_data(the_form, the_url_insert, the_function, the_url_display) { /* this will work on update too */
+function execute_query(the_form, the_url, the_function, the_url_display) { /* this is for applicable for creating and updating data */
 
 	var form_data = the_form.serialize();
 
 	$.ajax({
 
 		method: 'POST',
-		url: the_url_insert,
+		url: the_url,
 		data: form_data,
 		success: function() {
 

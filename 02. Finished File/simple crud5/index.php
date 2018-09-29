@@ -25,7 +25,7 @@
 
 		<div id="overlay">
 
-
+			<!-- FORM WILL BE LOADED WITH AJAX -->
 
 		</div>
 

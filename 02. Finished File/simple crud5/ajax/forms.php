@@ -1,16 +1,23 @@
 <?php require('../include/bootstrap.php'); ?>
+<?php 
 
-<?php $id = $_GET['id']; ?>
+	if (isset($_GET['id'])) { //check if $_GET is set, if set assign value to a variable
 
-<?php if (isset($id)) { ?>
+		$employeeid = $_GET['id'];
 
-	<?php $sql = "SELECT * FROM tblemployees WHERE employeeid = :id"; ?>
+	}
 
-	<?php $result = fetch_single_data($sql, $id); ?>
+?>
 
-	<!-- IF $_GET IS SET, SHOW UPDATE FORM -->
+<!-- IF $_GET IS SET, LOAD UPDATE FORM -->
 
-	<form id="update_form" method="post" data-id="<?php echo $id; ?>">
+<?php if (isset($employeeid)) { ?>
+
+	<?php $sql = "SELECT * FROM tblemployees WHERE employeeid = :employeeid"; ?>
+
+	<?php $result = fetch_single_data($sql, 'employeeid', $employeeid); ?>
+
+	<form id="update_form" method="post" data-id="<?php echo $employeeid; ?>">
 		
 		<fieldset>
 			<legend> Update Record </legend>
@@ -65,9 +72,9 @@
 		
 	</form>
 
-<?php } else { ?>
+<!-- IF $_GET IS NOT SET, SHOW ADD FORM -->
 
-	<!-- IF $_GET IS SET, SHOW ADD FORM -->
+<?php } else { ?>
 
 	<form id="add_form">
 					
@@ -121,3 +128,4 @@
 	</form>
 
 <?php } ?>
+

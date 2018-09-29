@@ -122,11 +122,11 @@ hr {
 	bottom: 0;
 	right: 0;
 	margin: auto;
-	width: 40%;
-	height: 54%;
+	width: 520px;
+	height: 358px;
 	background: rgba(0,0,0,0.9);
 	display: none;
-	padding: 20px;
+	padding: 20px 40px;
 	border: 1px solid black;
 
 }

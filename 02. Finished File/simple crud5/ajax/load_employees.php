@@ -37,8 +37,8 @@
 				$output .= "<td>" . $key['sex'] . "</td>";
 				$output .= "<td>" . $key['department'] . "</td>";
 				$output .= "<td>" . $key['program_desc'] . "</td>";
-				$output .= "<td><a class='upd' href=\"update.php?id={$key['employeeid']}\" data-id=\"{$key['employeeid']}\"> UPDATE </a>";
-				$output .= "<td><a class='del' href=\"delete.php?id={$key['employeeid']}\" data-id=\"{$key['employeeid']}\"> DELETE </a>";
+				$output .= "<td><a class='upd' href='#' data-id=\"{$key['employeeid']}\"> UPDATE </a>";
+				$output .= "<td><a class='del' href='#' data-id=\"{$key['employeeid']}\"> DELETE </a>";
 			$output .= "</tr>";
 
 		}

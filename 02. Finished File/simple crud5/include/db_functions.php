@@ -143,13 +143,13 @@ function sanitizedInput($value) {
 
 /* FUNCTIONS FOR RETURNING DATA */
 
-function fetch_single_data($sql, $id) {
+function fetch_single_data($sql, $token, $value) {
 
 	global $conn;
 
 	$stmt = $conn->prepare($sql);
 
-	$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+	bind($stmt, $token, $value);
 
 	$stmt->execute();
 
