@@ -18,7 +18,7 @@
 			<fieldset>
 				
 				<div>
-					<label for="manufacturerid"> Department </label>
+					<label for="manufacturerid"> Manufacturer </label>
 					<select name="manufacturerid" id="manufacturerid" required>
 
 						<option disabled selected value=''> -- SELECT MANUFACTURER -- </option>
@@ -33,7 +33,7 @@
 					</select>
 				</div>
 				<div>
-					<label for="modelid"> Program </label>
+					<label for="modelid"> Model </label>
 					<select name="modelid" id="modelid" required>
 						
 						<!-- DATA WILL BE LOADED WITH AJAX -->
