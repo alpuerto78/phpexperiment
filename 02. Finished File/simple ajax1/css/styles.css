@@ -1,0 +1,131 @@
+*, *::before, *::after {
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+
+.clearfix::after,
+.clearfix::before {
+
+	content: "";
+	display: block;
+	clear: both;
+
+}
+
+body {
+
+	/* font-size: 62.5%; */
+	font-size: 100%;
+	line-height: 1.5;
+	font-family: 'Arial','sans-serif','sans';
+	
+}
+
+#wrapper {
+
+	margin: 50px auto;
+	padding:  30px;
+
+}
+
+form {
+
+	position: relative;
+	width: 400px;
+	display: inline-block;
+
+}
+
+form div {
+
+	margin-bottom: 12px;
+
+}
+
+fieldset {
+
+	padding: 15px;
+
+}
+
+legend {
+
+	display: inline-block;
+	padding: 10px;
+
+}
+
+label {
+
+	float: left;
+	width: 100px;
+
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="button"],
+select,
+button {
+
+	padding: 3px 5px;
+
+}
+
+input[type="text"],
+select {
+
+	width: 70%;
+
+}
+
+button {
+
+	margin-bottom: 10px;
+
+}
+
+input[type="submit"] {
+
+	padding: 3px 5px;
+
+}
+
+table {
+
+	border-collapse: collapse;
+	margin-top: 30px;
+
+}
+
+td, th {
+
+	border:  1px solid black;
+	padding: 4px 8px;
+
+}
+
+hr {
+
+	margin: 20px 0;
+
+}
+#overlay {
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	width: 520px;
+	height: 358px;
+	background: rgba(0,0,0,0.9);
+	display: none;
+	padding: 20px 40px;
+	border: 1px solid black;
+
+}
