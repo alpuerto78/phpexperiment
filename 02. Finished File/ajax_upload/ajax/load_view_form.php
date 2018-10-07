@@ -12,7 +12,7 @@
 ?>
 <div class="info">
 	
-	<div class="profile-info clearfix">
+	<div class="profile-info">
 	
 		<span class="close"> X </span>
 	
