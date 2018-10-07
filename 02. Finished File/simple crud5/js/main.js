@@ -89,7 +89,7 @@ $(document).ready(function() {
 
 //CUSTOM FUNCTIONS
 
-function load_program(department_id, target_el) {
+function load_program(department_id, target_el) { //main dropdown, dependent dropdown
 
 	var departmentid = department_id;
 
