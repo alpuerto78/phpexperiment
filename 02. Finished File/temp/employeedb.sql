@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Oct 08, 2018 at 09:13 AM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 5.6.15
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `employeedb`
 --
@@ -54,19 +36,8 @@ CREATE TABLE `tblemployees` (
   `firstname` varchar(255) NOT NULL,
   `sex` varchar(6) NOT NULL,
   `departmentid` int(5) NOT NULL,
-  `programid` int(5) NOT NULL,
-  `photo` varchar(255) NOT NULL
+  `programid` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblemployees`
---
-
-INSERT INTO `tblemployees` (`employeeid`, `lastname`, `firstname`, `sex`, `departmentid`, `programid`, `photo`) VALUES
-(111, 'De la Cruz', 'Juan', 'Male', 2, 7, ''),
-(112, 'Tamad', 'Juan', 'Male', 4, 12, ''),
-(113, 'Sanchez', 'Jessica', 'Female', 5, 15, ''),
-(114, 'Samson', 'Delilah', 'Female', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -140,7 +111,7 @@ ALTER TABLE `tbldepartment`
 -- AUTO_INCREMENT for table `tblemployees`
 --
 ALTER TABLE `tblemployees`
-  MODIFY `employeeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `employeeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT for table `tblprogram`
 --
