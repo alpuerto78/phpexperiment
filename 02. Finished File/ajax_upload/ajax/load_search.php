@@ -23,7 +23,7 @@
 			echo "<th> Sex </th>";
 			echo "<th> Department </th>";
 			echo "<th> Program </th>";
-			echo "<th colspan='2'> Action </th>";
+			echo "<th colspan='3'> Action </th>";
 		echo "</tr>";
 
 		$result = fetch_multiple_data($sql);
@@ -39,6 +39,7 @@
 				echo "<td>" . $key['program_desc'] . "</td>";
 				echo "<td><a href='update.php?id={$key['employeeid']}'> UPDATE </a>";
 				echo "<td><a href=\"delete.php?id={$key['employeeid']}\" onclick=\"return confirm('Are you Sure?')\"> DELETE </a>";
+				echo "<td><a href='#' data-employee-id=\"{$key['employeeid']}\" class='view-info'> VIEW </a>";
 			echo "</tr>";
 
 		}
