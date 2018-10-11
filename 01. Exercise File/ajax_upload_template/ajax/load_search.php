@@ -1,9 +1,12 @@
 <?php
 
-	require('include/bootstrap.php');
+	require('../include/bootstrap.php');
 
-	$sql = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON tblemployees.departmentid = tbldepartment.departmentid ";
+	$search = $_POST['search'];
+
+	$sql  = "SELECT * FROM tblemployees INNER JOIN tbldepartment ON tblemployees.departmentid = tbldepartment.departmentid ";
 	$sql .= "INNER JOIN tblprogram ON tblemployees.programid = tblprogram.programid ";
+	$sql .= "WHERE CONCAT_WS(' ', lastname, firstname, sex, department, program_desc) LIKE '%"  . $search . "%'";
 
 	$count = row_count($sql);
 
@@ -28,7 +31,7 @@
 		foreach ($result as $key) {
 
 			echo "<tr>";
-			
+				
 				echo "<td>" . $key['lastname'] . "</td>";
 				echo "<td>" . $key['firstname'] . "</td>";
 				echo "<td>" . $key['sex'] . "</td>";
@@ -44,7 +47,7 @@
 
 	} else {
 
-		echo "<h3> No Records Found or Database is Empty! </h3>";
+		echo "<h3> No Match/es Found! </h3>";
 
 	}
 

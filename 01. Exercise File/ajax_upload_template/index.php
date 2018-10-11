@@ -11,16 +11,7 @@
 	</head>
 <body>
 
-
 	<div id="wrapper">
-
-	<pre>
-
-	Files required for Modification:
-	1. main.js
-	2. load_search.php
-
-	</pre>
 
 		<?php
 
@@ -88,24 +79,20 @@
 		<form id="live-search" class="mt-1">
 		
 			<div>
-				<label for="field"> Search By: </label>
-				<select name="field" id="field">
-					<option value="lastname"> Last Name </option>
-					<option value="firstname"> First Name </option>
-					<option value="sex"> Sex </option>
-					<option value="department"> Department </option>
-					<option value="program_desc"> Program </option>
-				</select>
-			</div>
-			<div>
-				<label for="search"> Search: </label>
-				<input type="text" name="search" id="search">
+				<label for="search"> Search </label>
+				<input type="text" name="search" id="search" placeholder="Enter Search String">
 			</div>
 
 		</form>
 
 		<div id="employee-table">
 			
+			<!-- DATA WILL BE LOADED IN AJAX -->
+
+		</div>
+
+		<div id="overlay">
+
 			<!-- DATA WILL BE LOADED IN AJAX -->
 
 		</div>

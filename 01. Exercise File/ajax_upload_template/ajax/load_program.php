@@ -1,6 +1,6 @@
 <?php 
 
-	require('include/bootstrap.php');
+	require('../include/bootstrap.php');
 
 	$departmentid = $_POST['departmentid'];
 

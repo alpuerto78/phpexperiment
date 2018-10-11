@@ -1,6 +1,6 @@
 <?php
 
-	require('connection.php');
+	require('include/bootstrap.php');
 
 	$id = $_GET['id'];
 
