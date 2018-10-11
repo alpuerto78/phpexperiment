@@ -121,7 +121,9 @@ function bind($stmt, $param, $value, $type = null) {
 
 	}
 
-	return $stmt->bindParam(":" . $param, sanitizedInput($value), $type);
+	$value = sanitizedInput($value);
+
+	return $stmt->bindParam(":" . $param, $value, $type);
 
 }
 

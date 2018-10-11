@@ -2,15 +2,11 @@
 
 /* SETS OF FUNCTIONS FOR CREATING DATA, UPDATING DATA */
 
-function execute_query($table_name, &$post_data, $mode = 'create', $primary_key = null, $id = null, $method = 'php') { //Name of Table, Posted Data, Mode?, [for update], [for update]
+function execute_query($table_name, &$post_data, $mode = 'create', $primary_key = null, $id = null) { //Name of Table, Posted Data, Mode?, [for update], [for update]
 
 	global $conn;
 
-	if ($method == 'php') {
-
-		array_pop($post_data);
-
-	}
+	array_pop($post_data);
 
 	switch($mode) {
 
@@ -125,7 +121,9 @@ function bind($stmt, $param, $value, $type = null) {
 
 	}
 
-	return $stmt->bindParam(":" . $param, sanitizedInput($value), $type);
+	$value = sanitizedInput($value);
+
+	return $stmt->bindParam(":" . $param, $value, $type);
 
 }
 
@@ -143,13 +141,13 @@ function sanitizedInput($value) {
 
 /* FUNCTIONS FOR RETURNING DATA */
 
-function fetch_single_data($sql, $token, $value) {
+function fetch_single_data($sql, $id) {
 
 	global $conn;
 
 	$stmt = $conn->prepare($sql);
 
-	bind($stmt, $token, $value);
+	$stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
 	$stmt->execute();
 
