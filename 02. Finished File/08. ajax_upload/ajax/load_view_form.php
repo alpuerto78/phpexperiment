@@ -22,14 +22,14 @@
 
 					<?php 
 
-						if ($result['photo'] != '') { 
-
-							echo 'upload/' . $result['photo']; 
-
-						} else { 
+						if ($result['photo'] == '' || !file_exists('upload/' . $result['photo'])) { 
 
 							echo 'img/nophoto.jpg'; 
 
+						} else { 
+
+							echo 'upload/' . $result['photo']; 
+							
 						} 
 
 					?>
